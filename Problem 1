@@ -1,0 +1,44 @@
+fhand = open('/ufrc/bsc4452/mcullen1/CO-OPS__8729108__wl.csv') #bring in data
+
+print(fhand) #display data 
+
+
+
+max_number = 0  #set baseline variables to 0
+
+date = 0
+
+count = 0 
+
+
+
+fhand.readline() #read the first line and move onto the second for the loop, possibly better alternative to next function
+
+
+for line in fhand:
+
+    #print(line)                   #mostly a test when writing the code
+
+    line = line.rstrip()           #get rid of blank spaces
+
+    fields = line.split(",")       #define commas as the dividers for the lines/strings
+
+    if count > 0: 
+
+        try:
+
+            if float(fields[1]) > max_number: #convert the water level column to a decimal value, if statement for finding higher values
+
+                max_number = float(fields[1]) #record values that are higher than previously read water level
+
+                date=fields[0]        #make note of the date value 
+
+        except:
+
+            print(f'bad data on {line}')   #deal with lines that have blanks
+
+    count+=1
+
+        
+
+print(f'Highest water level was {max_number} on {date}.') #display the values we want in context
