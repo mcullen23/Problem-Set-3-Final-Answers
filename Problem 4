@@ -1,0 +1,28 @@
+#make a chart of water levels over time
+#start a new, full kernel
+
+import pandas as pd #bring in pandas
+
+from matplotlib import pyplot as plt #bring in functions to make graphs and figures
+
+sample_data = pd.read_csv('/ufrc/bsc4452/mcullen1/CO-OPS__8729108__wl.csv') #call in data
+
+print(sample_data) #show data just for reference
+
+sample_data.columns = sample_data.columns.str.strip().str.replace(' ', '_') #get rid of white spaces, replace spaces between words with underscore
+
+x = sample_data.Date_Time #tidy up code, define date and time variable as x
+
+y = sample_data.Water_Level #tidy up code, define water level variable as y
+
+plt.plot(x, y) #create plot of select data, date/time on x axis and water level on y axis
+
+plt.title("Water Levels Over Time") #add title
+
+plt.xlabel("Time") #add x label
+
+plt.ylabel("Water Levels") #add y label
+
+plt.legend(["water levels"]) #add legend to define line
+
+plt.show() #display the graph
