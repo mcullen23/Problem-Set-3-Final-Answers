@@ -1,0 +1,25 @@
+import pandas as pd #important, use pandas for this answer
+
+file = "/ufrc/bsc4452/mcullen1/CO-OPS__8729108__wl.csv" #define file with data
+
+def read():
+
+    try:
+    
+        data = pd.read_csv(file, usecols=[0,1]) #read csv and keep only data/time and water levels, columns 0 and 1
+    
+        data.columns = data.columns.str.strip() #enables sorting of data by getting rid of whitespaces
+    
+        sorted_data = data.sort_values(by=["Water Level"], ascending=False) #new dataset sorted by water level, highest to lowest
+    
+        answer = sorted_data.head(1) #creates value that is just the top, or highest, date and water level
+    
+        print(answer) #displays the highest water level and the corresponding time
+    
+    except:
+        
+        print('uh oh, something went wrong!') #mentions an error if there is a blank value or other issue
+    
+        exit()
+   
+read() #wrap it all within one function so it will work
