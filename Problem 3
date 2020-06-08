@@ -1,0 +1,25 @@
+#find greatest change in water levels
+
+import pandas as pd #important, use pandas for this answer
+
+file = "/ufrc/bsc4452/mcullen1/CO-OPS__8729108__wl.csv" #define file with data
+
+data = pd.read_csv(file, usecols=[0,1]) #read csv and keep only data/time and water levels, columns 0 and 1
+
+data.columns = data.columns.str.strip() #enables sorting of data by getting rid of whitespaces
+
+data.columns = data.columns.str.strip().str.replace(' ', '_') #replaces blank spaces between words in labels with underscore
+
+data['Diff'] = data.Water_Level.diff() #new value with the calculated differences between level waters in one column and the water level in the previous column
+
+sorted_data = data.sort_values(by=['Diff'], ascending = False) #creates a new dataset with water level differences sorted from highest to lowest
+
+check = sorted_data.head(5) #checkpoint to make sure the shorting of the differences worked
+
+answer3 = sorted_data.head(1) #shows difference value from top line, along with correponding date
+
+print('Accuracy Guarantee...')
+print(check)
+
+print('Greatest Change in Water Level: ')
+print(answer3)
